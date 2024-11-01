@@ -245,7 +245,7 @@ rmodel = reservoir_model(model)
 push!(rmodel.output_variables, :RelativePermeabilities)
 push!(rmodel.output_variables, :PhaseViscosities)
 # ## Simulate the schedule
-# We set a maximum internal time-step of 30 days to ensure smooth convergence
+# We set a maximum internal time-step of 90 days to ensure smooth convergence
 # and reduce numerical diffusion.
 wd, states, t = simulate_reservoir(state0, model, dt,
     parameters = parameters,

@@ -49,10 +49,8 @@ represents a compact full tensor representation (6 elements in 3D, 3 in 2D).
 | `permeability`               | Rock ability to conduct fluid flow         | ``m^2``      | 100 mD  |
 | `porosity`                   | Rock void fraction open to flow (0 to 1)   | -            |  0.3    |
 | `rock_density`               | Mass density of rock                       | ``kg^3/m^3`` | 2000.0  |
-| `rock_heat_capacity`         | Specific heat capacity of rock             | ``J/(kg K)`` | 900.0   |
 | `rock_thermal_conductivity`  | Heat conductivity of rock                  | ``W/m K``    | 3.0     |
 | `fluid_thermal_conductivity` | Heat conductivity of fluid phases          | ``W/m K``    | 0.6     |
-| `component_heat_capacity`    | Specific heat capacity of fluid components | ``J/(kg K)`` | 4184.0  |
 
 Note that the default values are taken to be roughly those of water for fluid
 phases and sandstone for those of rock. Choice of values can severely impact
@@ -64,8 +62,6 @@ function reservoir_domain(g;
         porosity = 0.1,
         rock_thermal_conductivity = 3.0, # W/m K (~sandstone)
         fluid_thermal_conductivity = 0.6, # W/m K (~water)
-        rock_heat_capacity = 900.0, # ~sandstone
-        component_heat_capacity = 4184.0, # ~water
         rock_density = 2000.0,
         diffusion = missing,
         kwarg...
@@ -73,8 +69,6 @@ function reservoir_domain(g;
     all(isfinite, permeability) || throw(ArgumentError("Keyword argument permeability has non-finite entries."))
     all(isfinite, porosity) || throw(ArgumentError("Keyword argument porosity has non-finite entries."))
     all(isfinite, fluid_thermal_conductivity) || throw(ArgumentError("Keyword argument fluid_thermal_conductivity has non-finite entries."))
-    all(isfinite, rock_heat_capacity) || throw(ArgumentError("Keyword argument rock_heat_capacity has non-finite entries."))
-    all(isfinite, component_heat_capacity) || throw(ArgumentError("Keyword argument component_heat_capacity has non-finite entries."))
 
     if !ismissing(diffusion)
         all(isfinite, diffusion) || throw(ArgumentError("Keyword argument diffusion has non-finite entries."))
